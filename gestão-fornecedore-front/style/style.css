@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    background: rgb(248, 248, 248);
+    width: 100%;    
+}
+
+.navigation{
+    position: fixed;
+    width: 60px;
+    height: 100%;
+    background: rgb(106, 164, 211);
+    transition: .2s ease-in-out;
+}
+
+.navigation:hover{
+    width: 300px;
+    transition: .2s ease-in-out;
+}
+
+.navigation ul{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;    
+    margin-top: 50px;
+}
+
+.navigation ul li{
+    position: relative;
+    width: 100%;
+    list-style: none;
+}
+
+.navigation ul li a:hover{
+    background: white;
+    color: black;
+    transition: .2s ease-in-out;
+}
+
+.navigation ul li a{
+    position: relative;  
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: white;
+    transition: .2s ease-in-out;
+}
+
+.navigation ul li a .icon{
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.navigation .title{            
+    display: none;    
+}
+
+.navigation:hover ul li a .title{
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+
+
+.container{
+    padding: 50px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form{
+    background: white;      
+    padding: 50px;
+}
+
+table h3{    
+    color: rgb(102, 102, 102);
+    margin-bottom: 10px;
+    border-bottom: 2px solid rgb(218, 218, 218);
+}
+
+table td{
+    color: rgb(151, 151, 151);    
+    padding: 10px 5px 10px 0;
+}
+#send-button{
+    padding: 5px 25px 5px 25px;
+    border: none;   
+    background-color: rgb(102, 237, 255);     
+}
