@@ -1,0 +1,34 @@
+.fornecedor{    
+    background-color: rgb(240, 240, 240);
+    transition: .1s ease-in-out;          
+}
+
+.fornecedor:hover{
+    background-color: rgb(144, 144, 144);
+    transition: .1s ease-in-out;
+    cursor: pointer;
+}
+
+th{
+    text-align: start;
+}
+
+.fornecedor td{        
+    padding: 10px;            
+}
+.fornecedor td:first-child{
+    border-radius: 15px 0 0 15px;
+}
+
+.fornecedor td:last-child{
+    border-radius: 0 15px 15px 0;
+}
+
+.fornecedor:hover td{
+    color: rgb(255, 255, 255);
+}
+
+table{
+    padding: 50px;
+    background-color: white;    
+}

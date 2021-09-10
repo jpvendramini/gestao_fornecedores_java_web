@@ -17,12 +17,12 @@ body{
     width: 60px;
     height: 100%;
     background: rgb(106, 164, 211);
-    transition: .2s ease-in-out;
+    transition: .1s ease-in-out;
 }
 
 .navigation:hover{
-    width: 300px;
-    transition: .2s ease-in-out;
+    width: 250px;
+    transition: .1s ease-in-out;
 }
 
 .navigation ul{
@@ -86,6 +86,8 @@ body{
     margin-right: auto;
 }
 
+
+/* FORMULÁRIO */
 form{
     background: white;      
     padding: 50px;
