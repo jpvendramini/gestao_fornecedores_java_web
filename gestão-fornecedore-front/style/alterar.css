@@ -10,3 +10,16 @@
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
 }
+
+.close-button-div{
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    margin-left: -55px;    
+    margin-bottom: -50px;
+}
+
+.fa-window-close{
+    color: red;
+    cursor: pointer;         
+}
