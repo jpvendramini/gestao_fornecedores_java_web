@@ -1,60 +1,123 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style/style.css">
-    <title>Fornecedores</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/consultar.css">
+    <link rel="stylesheet" href="../style/alterar.css">
+    <title>Fornecedores | Alterar</title>
 </head>
 <body>
     <%
-    String username =(String) session.getAttribute("username");
-    if(username == null){
-        response.sendRedirect("src/login.jsp");
-    }else{
-        out.println("Bem vindo! " + username + "<br>"); 
-    }
-%>
-    <header >
+	    String username =(String) session.getAttribute("username");
+	    if(username == null){
+	        response.sendRedirect("login.jsp");
+	    }
+	%>
+    <header>
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="./src/consultar.html">
+                    <a href="./consultar.jsp">
                         <span class="icon"><i class="fas fa-search"></i></span>
                         <span class="title">Consultar</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="../index.jsp">
                         <span class="icon"><i class="fas fa-address-book"></i></span>
                         <span class="title">Inserir</span>
                     </a>
                 </li>
                 <li>
-                    <a href="./src/alterar.html">
+                    <a href="./alterar.jsp">
                         <span class="icon"><i class="fas fa-cogs"></i></span>
                         <span class="title">Alterar</span>
                     </a>
                 </li>
                 <li>
-                    <a href="./src/remover.html">
+                    <a href="./remover.jsp">
                         <span class="icon"><i class="fas fa-trash"></i></span>
                         <span class="title">Remover</span>
                     </a>
                 </li>
-                <li>
-                    <a href="logout">Log out</a>
+                 <li>
+                    <a href="../logout">
+                    	<span class="icon"><i class="fas fa-cog"></i></span>
+                    	<span class="title">Log out</span>
+                    </a>
                 </li>
             </ul>
         </div>
     </header>
-    <main>
+    <div class="container">
+        <h2>Alterar Fornecedores</h2>   
+        <table>            
+            <tr>
+                <th>Empresa</th>
+                <th>Número</th>
+                <th>E-mail</th>
+                <th>Produto</th>
+                <th>Endereço</th>
+                <th>Cidade</th>
+                <th>País</th>
+                <th>Tipo</th>                
+            </tr>
+            <tr class="fornecedor">
+                <td >Dundler Miffin</td>          
+                <td>11090-12901</td>
+                <td>dunder@gmail.com</td>
+                <td>Papel</td>
+                <td>Avenida Scranton</td>
+                <td>Scranton</td>
+                <td>Estados Unidos</td>
+                <td>Filial</td>
+            </tr>            
+            <tr class="fornecedor">
+                <td >Dundler Miffin</td>          
+                <td>11090-12901</td>
+                <td>dunder@gmail.com</td>
+                <td>Papel</td>
+                <td>Avenida Scranton</td>
+                <td>Scranton</td>
+                <td>Estados Unidos</td>
+                <td>Filial</td>
+            </tr>    
+            <tr class="fornecedor">
+                <td >Dundler Miffin</td>          
+                <td>11090-12901</td>
+                <td>dunder@gmail.com</td>
+                <td>Papel</td>
+                <td>Avenida Scranton</td>
+                <td>Scranton</td>
+                <td>Estados Unidos</td>
+                <td>Filial</td>
+            </tr>    
+            <tr class="fornecedor">
+                <td >Dundler Miffin</td>          
+                <td>11090-12901</td>
+                <td>dunder@gmail.com</td>
+                <td>Papel</td>
+                <td>Avenida Scranton</td>
+                <td>Scranton</td>
+                <td>Estados Unidos</td>
+                <td>Filial</td>
+            </tr>    
+        </table>
+    </div>
+    <div id="modal">
         <div class="container">
             <h2>Cadastro de Fornecedores</h2>
-            <form action="">        
-                <table>                    
+            <form action="">    
+                <div class="close-button-div">
+                    <i class="fas fa-window-close fa-2x"></i>    
+                </div>
+                <table>                             
                     <tr><th colspan="4" align="left"><h3>Endereço</h3></th></tr>
                     <tr>
                         <td>Logradouro</td>
@@ -115,6 +178,18 @@
                 <input type="submit" id="send-button">
             </form>
         </div>
-    </main>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+               
+        $(".fornecedor").click(function(){
+            let modal = document.getElementById('modal');     
+            modal.style.display = "block";
+        });   
+        $(".close-button-div").click(function(){
+            let modal = document.getElementById('modal');     
+            modal.style.display = "none";
+        });
+    </script>
 </body>
 </html>
