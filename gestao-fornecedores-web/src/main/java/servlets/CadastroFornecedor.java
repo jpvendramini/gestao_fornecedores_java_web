@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import contato.Contato;
+import contato.Email;
+import contato.Telefone;
+import contato.TipoTelefone;
 import endereco.Cidade;
 import endereco.Endereco;
 import endereco.Pais;
@@ -17,7 +19,7 @@ import endereco.UF;
 import fornecedor.CNAE;
 import fornecedor.Fornecedor;
 import fornecedor.FornecedorController;
-import fornecedor.Status;
+import fornecedor.FornecedorDAO;
 import produto.Produto;
 import produto.TipoProduto;
 
@@ -26,8 +28,9 @@ public class CadastroFornecedor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		FornecedorController forn = new FornecedorController();
+		forn.findAll();
+		request.setAttribute("fornecedores", forn);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		FornecedorController fornControl = new FornecedorController();
@@ -60,8 +63,15 @@ public class CadastroFornecedor extends HttpServlet {
 		Endereco end = new Endereco(endereco, bairro, numero, cep, new Cidade(cidade), new UF(uf), new Pais(pais));
 		
 		//COTATO
-		String email = request.getParameter("email");
+		String email = request.getParameter("email");		
+		int ddd = Integer.parseInt(request.getParameter("ddd"));
+		int codigo= Integer.parseInt(request.getParameter("codigo"));
 		String telefone = request.getParameter("telefone");
+		
+		Telefone tel = new Telefone(ddd, codigo, telefone, TipoTelefone.CELULAR);
+		Email eml = new Email();
+		eml.setDescricao(email);
+		Contato contato = new Contato(eml, tel);
 		
 		//PRODUTO
 		String produto = request.getParameter("produto");
@@ -74,7 +84,7 @@ public class CadastroFornecedor extends HttpServlet {
 			prod = new Produto(produto, TipoProduto.SERVICO);
 		}
 		
-		Fornecedor forn = new Fornecedor(cnpj, inscricaoEstadual, inscricaoMunicipal, nomeFantasia, razaoSocial, end, cn, prod);
+		Fornecedor forn = new Fornecedor(cnpj, inscricaoEstadual, inscricaoMunicipal, nomeFantasia, razaoSocial, end, cn, prod, contato);
 		
 		fornControl.create(forn);
 		

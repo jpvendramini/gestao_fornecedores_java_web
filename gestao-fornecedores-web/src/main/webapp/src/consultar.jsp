@@ -12,10 +12,20 @@
     <title>Fornecedores | Consultar</title>
 </head>
 <body>
+	<%@page import="fornecedor.FornecedorController" %>
+	<%@page import="fornecedor.Fornecedor" %>
+	<%@page import="java.util.List" %>
     <%
 	    String username =(String) session.getAttribute("username");
 	    if(username == null){
 	        response.sendRedirect("login.jsp");
+	    }
+	    
+	    FornecedorController forn = new FornecedorController(); 
+	    
+	    List<Fornecedor> fornecedores = forn.findAll();
+	    if(!fornecedores.isEmpty()){
+	    	request.setAttribute("fornecedores", fornecedores);	    	
 	    }
 	%>
     <header >
@@ -59,54 +69,26 @@
         <table>            
             <tr>
                 <th>Empresa</th>
-                <th>NÃºmero</th>
+                <th>Número</th>
                 <th>E-mail</th>
-                <th>Produto</th>
-                <th>EndereÃ§o</th>
+                <th style="width:150px;">Produto</th>
+                <th style="width:200px;">Endereço</th>
                 <th>Cidade</th>
-                <th>PaÃ­s</th>
-                <th>Tipo</th>                
+                <th>UF</th>  
+                <th>País­s</th>                              
             </tr>
+            <%for(Fornecedor f:fornecedores){%>
             <tr class="fornecedor">
-                <td >Dundler Miffin</td>          
-                <td>11090-12901</td>
-                <td>dunder@gmail.com</td>
-                <td>Papel</td>
-                <td>Avenida Scranton</td>
-                <td>Scranton</td>
-                <td>Estados Unidos</td>
-                <td>Filial</td>
-            </tr>
-            <tr class="fornecedor">
-                <td>Dundler Miffin</td>          
-                <td>11090-12901</td>
-                <td>dunder@gmail.com</td>
-                <td>Papel</td>
-                <td>Avenida Scranton</td>
-                <td>Scranton</td>
-                <td>Estados Unidos</td>
-                <td>Filial</td>
-            </tr>
-            <tr class="fornecedor">
-                <td>Dundler Miffin</td>          
-                <td>11090-12901</td>
-                <td>dunder@gmail.com</td>
-                <td>Papel</td>
-                <td>Avenida Scranton</td>
-                <td>Scranton</td>
-                <td>Estados Unidos</td>
-                <td>Filial</td>
-            </tr>
-            <tr class="fornecedor">
-                <td>Dundler Miffin</td>          
-                <td>11090-12901</td>
-                <td>dunder@gmail.com</td>
-                <td>Papel</td>
-                <td>Avenida Scranton</td>
-                <td>Scranton</td>
-                <td>Estados Unidos</td>
-                <td>Filial</td>
-            </tr>
+                <td><%=f.getNomeFantasia()%></td>          
+                <td><%=f.getContato().getTelefone().getNumber() %></td>
+                <td><%=f.getContato().getEmail().getDescricao() %></td>
+                <td><%=f.getProduto().getDescricao() %></td>
+                <td><%=f.getEndereco().getDescricao() %></td>
+                <td><%=f.getEndereco().getCidade().getDescricao() %></td>
+                <td><%=f.getEndereco().getUf().getDescricao() %></td>
+                <td><%=f.getEndereco().getPais().getDescricao() %></td>
+            </tr>                        
+            <%}%>
         </table>
     </div>
 </body>

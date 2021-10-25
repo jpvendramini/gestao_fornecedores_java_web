@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <link rel="stylesheet" href="./style/style.css">
     <title>Fornecedores | Inserir</title>
+    <style>
+		input{
+			border: none;
+			border-bottom: 1.8px solid gray;
+		}
+	
+	</style>
 </head>
 <body>
     <%
@@ -16,7 +23,7 @@
 	    if(username == null){
 	        response.sendRedirect("src/login.jsp");
 	    }
-	%>
+	%>	
     <header >
         <div class="navigation">
             <ul>
@@ -90,9 +97,9 @@
                     </tr>
                     <tr>
                         <td>Celular</td>
-                        <td><input type="number" value="1231231231" name="telefone"></td>
-                        <td>Telefone</td>
-                        <td><input type="number" value="123123123312"></td>
+                        <td><input type="number" value="55" name="codigo" style="width:50px;">
+                        <input type="number" value="11" name="ddd"style="width:50px;">
+                        <input type="number" value="1231231231" name="telefone"style="width:100px;"></td>
                     </tr>
                     <tr><th colspan="4" align="left"><h3>Empresa</h3></th></tr>
                     <tr>

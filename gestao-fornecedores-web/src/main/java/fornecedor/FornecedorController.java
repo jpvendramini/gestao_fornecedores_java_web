@@ -7,10 +7,12 @@ import dao.DAO;
 
 public class FornecedorController implements Controller<Fornecedor>{
 
+	DAO<Fornecedor> fornecedorDAO = new FornecedorDAO();
+	
 	@Override
-	public void create(Fornecedor fornecedor) {
-		DAO<Fornecedor> fornecedorDAO = new FornecedorDAO();
-		fornecedorDAO.create(fornecedor);		
+	public void create(Fornecedor fornecedor) {		
+		fornecedorDAO.create(fornecedor);
+		System.out.println(fornecedorDAO.findAll());		
 	}
 
 	@Override
@@ -20,9 +22,8 @@ public class FornecedorController implements Controller<Fornecedor>{
 	}
 
 	@Override
-	public List<Fornecedor> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Fornecedor> findAll() {		
+		return fornecedorDAO.findAll();
 	}
 
 	@Override

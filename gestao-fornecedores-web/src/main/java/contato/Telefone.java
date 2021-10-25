@@ -8,6 +8,11 @@ public class Telefone extends Dominio {
 	private String number;
 	private TipoTelefone tipo;
 	
+	public Telefone(String number) {
+		super();
+		this.number = number;
+	}
+	
 	public Telefone(int codigo, int ddd, String number, TipoTelefone tipo) {
 		super();
 		this.codigo = codigo;

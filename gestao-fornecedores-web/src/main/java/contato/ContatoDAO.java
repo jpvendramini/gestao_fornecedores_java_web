@@ -11,8 +11,6 @@ import dao.DAO;
 import dao.FactoryDAO;
 
 public class ContatoDAO implements DAO<Contato>{
-
-	
 	public static void createTelefone(Telefone telefone, long fornecedorId) {
 		String telefoneSql = "INSERT INTO telefone(tlf_codigo, tlf_ddd, tlf_numero, tlf_tipo) VALUES(?, ?, ?, ?)";		
 		String telefoneForSql = "INSERT INTO telefone_fornecedor(fnc_id, tlf_id) VALUES(?, ?)";
@@ -34,7 +32,7 @@ public class ContatoDAO implements DAO<Contato>{
 			}
 			stmt = conn.prepareStatement(telefoneForSql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setLong(1, fornecedorId);
-			stmt.setLong(1, telefoneId);
+			stmt.setLong(2, telefoneId);
 			stmt.execute();
 			stmt.close();
 		}catch(SQLException e) {
@@ -63,7 +61,7 @@ public class ContatoDAO implements DAO<Contato>{
 			}			
 			stmt = conn.prepareStatement(emailForSql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setLong(1, fornecedorId);
-			stmt.setLong(1, emailId);
+			stmt.setLong(2, emailId);
 			stmt.execute();
 			stmt.close();
 		}catch(SQLException e) {

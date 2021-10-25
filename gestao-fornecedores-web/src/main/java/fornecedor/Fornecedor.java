@@ -20,8 +20,16 @@ public class Fornecedor extends Dominio{
 	
 	public Fornecedor() {}
 	
+	public Fornecedor(String nomeFantasia, Endereco endereco, Produto produto, Contato contato) {
+		super();		
+		this.nomeFantasia = nomeFantasia;		
+		this.endereco = endereco;
+		this.produto = produto;		
+		this.contato = contato;
+	}
+	
 	public Fornecedor(int cnpj, String inscricaoEstadual, String inscricaoMunicipal, String nomeFantasia,
-			String razaoSocial, Endereco endereco, CNAE cnae, Produto produto) {
+			String razaoSocial, Endereco endereco, CNAE cnae, Produto produto, Contato contato) {
 		super();
 		this.cnpj = cnpj;
 		this.inscricaoEstadual = inscricaoEstadual;
@@ -31,6 +39,7 @@ public class Fornecedor extends Dominio{
 		this.endereco = endereco;
 		this.produto = produto;
 		this.cnae = cnae;
+		this.contato = contato;
 	}
 
 	public Fornecedor(int cnpj, String inscricaoEstadual, String inscricaoMunicipal, String nomeFantasia,

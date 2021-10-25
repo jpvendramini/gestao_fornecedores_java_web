@@ -10,6 +10,15 @@ public class Endereco extends Dominio{
 	private UF uf;
 	private Pais pais;
 
+	public Endereco(String end, String bairro, Cidade cidade, UF uf, Pais pais) {
+		super();
+		this.setDescricao(end);
+		this.bairro = bairro;				
+		this.cidade = cidade;
+		this.uf = uf;
+		this.pais = pais;
+	}
+	
 	public Endereco(String end, String bairro, String numero, String cep, Cidade cidade, UF uf, Pais pais) {
 		super();
 		this.setDescricao(end);
