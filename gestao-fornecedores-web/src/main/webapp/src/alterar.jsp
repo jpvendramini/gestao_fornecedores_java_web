@@ -13,10 +13,20 @@
     <title>Fornecedores | Alterar</title>
 </head>
 <body>
+    <%@page import="fornecedor.FornecedorController" %>
+	<%@page import="fornecedor.Fornecedor" %>
+	<%@page import="java.util.List" %>
     <%
 	    String username =(String) session.getAttribute("username");
 	    if(username == null){
 	        response.sendRedirect("login.jsp");
+	    }
+	    
+	    FornecedorController forn = new FornecedorController(); 
+	    
+	    List<Fornecedor> fornecedores = forn.findAll();
+	    if(!fornecedores.isEmpty()){
+	    	request.setAttribute("fornecedores", fornecedores);	    	
 	    }
 	%>
     <header>
@@ -59,137 +69,39 @@
         <h2>Alterar Fornecedores</h2>   
         <table>            
             <tr>
+            	<th>ID</th>
                 <th>Empresa</th>
-                <th>Número</th>
+                <th>N�mero</th>
                 <th>E-mail</th>
                 <th>Produto</th>
-                <th>Endereço</th>
+                <th>Endere�o</th>
                 <th>Cidade</th>
-                <th>País</th>
-                <th>Tipo</th>                
+                <th>UF</th>
+                <th>Pa�s</th>                
             </tr>
-            <tr class="fornecedor">
-                <td >Dundler Miffin</td>          
-                <td>11090-12901</td>
-                <td>dunder@gmail.com</td>
-                <td>Papel</td>
-                <td>Avenida Scranton</td>
-                <td>Scranton</td>
-                <td>Estados Unidos</td>
-                <td>Filial</td>
-            </tr>            
-            <tr class="fornecedor">
-                <td >Dundler Miffin</td>          
-                <td>11090-12901</td>
-                <td>dunder@gmail.com</td>
-                <td>Papel</td>
-                <td>Avenida Scranton</td>
-                <td>Scranton</td>
-                <td>Estados Unidos</td>
-                <td>Filial</td>
-            </tr>    
-            <tr class="fornecedor">
-                <td >Dundler Miffin</td>          
-                <td>11090-12901</td>
-                <td>dunder@gmail.com</td>
-                <td>Papel</td>
-                <td>Avenida Scranton</td>
-                <td>Scranton</td>
-                <td>Estados Unidos</td>
-                <td>Filial</td>
-            </tr>    
-            <tr class="fornecedor">
-                <td >Dundler Miffin</td>          
-                <td>11090-12901</td>
-                <td>dunder@gmail.com</td>
-                <td>Papel</td>
-                <td>Avenida Scranton</td>
-                <td>Scranton</td>
-                <td>Estados Unidos</td>
-                <td>Filial</td>
-            </tr>    
+            <%for(Fornecedor f:fornecedores){%>
+	            <form action="../AlterarFornecedor?id=<%=f.getId() %>" method="post" id="form" >          	
+		            <tr class="fornecedor" onclick="sendForm()">
+		            	<td><%=f.getId()%></td>
+		                <td><%=f.getNomeFantasia()%></td>
+		                <td><%=f.getContato().getTelefone().getNumber() %></td>
+		                <td><%=f.getContato().getEmail().getDescricao() %></td>
+		                <td><%=f.getProduto().getDescricao() %></td>
+		                <td><%=f.getEndereco().getDescricao() %></td>
+		                <td><%=f.getEndereco().getCidade().getDescricao() %></td>
+		                <td><%=f.getEndereco().getUf().getDescricao() %></td>
+		                <td><%=f.getEndereco().getPais().getDescricao() %></td>
+		            </tr> 
+	            </form>
+            <%}%>          
         </table>
-    </div>
-    <div id="modal">
-        <div class="container">
-            <h2>Cadastro de Fornecedores</h2>
-            <form action="">    
-                <div class="close-button-div">
-                    <i class="fas fa-window-close fa-2x"></i>    
-                </div>
-                <table>                             
-                    <tr><th colspan="4" align="left"><h3>Endereço</h3></th></tr>
-                    <tr>
-                        <td>Logradouro</td>
-                        <td><input type="text" placeholder="Rua, avenida..."></td>
-                        <td>Cidade</td>
-                        <td><input type="text" placeholder="Cidade"></td>
-                    </tr>
-                    <tr>
-                        <td>Estado</td>
-                        <td><input type="text" placeholder="UF"></td>
-                        <td>País</td>
-                        <td><input type="text" placeholder="Brasil, EUA"></td>
-                    </tr>
-                    <tr><th colspan="4" align="left"><h3>Contato</h3></th></tr>
-                    <tr>
-                        <td>Departamento</td>
-                        <td><input type="text" placeholder="Papelaria, Marcenaria..."></td>
-                        <td>Ramal</td>
-                        <td><input type=""></td>
-                    </tr>
-                    <tr>
-                        <td>Celular</td>
-                        <td><input type="number"></td>
-                        <td>Telefone</td>
-                        <td><input type="number"></td>
-                    </tr>
-                    <tr>
-                        <td>E-mail</td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr><th colspan="4" align="left"><h3>Empresa</h3></th></tr>
-                    <tr>
-                        <td>OS</td>
-                        <td><input type="number"></td>
-                        <td><input type="radio" name="tipo_empresa">Matriz</td>
-                        <td><input type="radio" name="tipo_empresa">Filial</td>
-                    </tr>
-                    <tr><th colspan="4" align="left"><h3>Fornecedor</h3></th></tr>
-                    <tr>
-                        <td>CNAE</td>
-                        <td><input type="text"></td>
-                        <td>CNPJ</td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td>Inscrição Estadual</td>
-                        <td><input type="number"></td>
-                        <td>Inscrição Municipal</td>
-                        <td><input type="number"></td>
-                    </tr>
-                    <tr>
-                        <td>Razão Social</td>
-                        <td><input type="text"></td>
-                        <td>Nome Fantasia</td>
-                        <td><input type="text"></td>
-                    </tr>
-                </table>
-                <input type="submit" id="send-button">
-            </form>
-        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script>
-               
-        $(".fornecedor").click(function(){
-            let modal = document.getElementById('modal');     
-            modal.style.display = "block";
-        });   
-        $(".close-button-div").click(function(){
-            let modal = document.getElementById('modal');     
-            modal.style.display = "none";
-        });
+    	function sendForm(){
+    		var form = document.getElementById("form");
+    		form.submit();
+    	} 
     </script>
 </body>
 </html>

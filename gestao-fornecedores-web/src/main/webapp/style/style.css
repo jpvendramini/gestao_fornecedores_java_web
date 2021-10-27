@@ -106,7 +106,8 @@ table td{
     padding: 10px 5px 10px 0;
 }
 #send-button{
-    padding: 5px 25px 5px 25px;
+    padding: 30px 50px;
     border: none;   
-    background-color: rgb(102, 237, 255);     
+    background-color: rgb(102, 237, 255); 
+    border-radius: 20px;    
 }

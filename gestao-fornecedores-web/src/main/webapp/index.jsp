@@ -137,7 +137,9 @@
                         </td>
                     </tr>
                 </table>
-                <input type="submit" id="send-button">
+                <div style="display: flex; justify-content: center;">
+                	<input type="submit" id="send-button">
+                </div>
             </form>
         </div>
     </main>
