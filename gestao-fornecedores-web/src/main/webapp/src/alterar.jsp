@@ -66,39 +66,39 @@
         </div>
     </header>
     <div class="container">
+        
+        <div class="container" >  
         <h2>Alterar Fornecedores</h2>   
-        <table>            
-            <tr>
-            	<th>ID</th>
-                <th>Empresa</th>
-                <th>Número</th>
-                <th>E-mail</th>
-                <th>Produto</th>
-                <th>Endereço</th>
-                <th>Cidade</th>
-                <th>UF</th>
-                <th>País</th>                
-            </tr>
-            <%for(Fornecedor f:fornecedores){%>
-	            <form action="../AlterarFornecedor?id=<%=f.getId() %>" method="post" id="form" >          	
-		            <tr class="fornecedor" onclick="sendForm()">
-		            	<td><%=f.getId()%></td>
-		                <td><%=f.getNomeFantasia()%></td>
-		                <td><%=f.getContato().getTelefone().getNumber() %></td>
-		                <td><%=f.getContato().getEmail().getDescricao() %></td>
-		                <td><%=f.getProduto().getDescricao() %></td>
-		                <td><%=f.getEndereco().getDescricao() %></td>
-		                <td><%=f.getEndereco().getCidade().getDescricao() %></td>
-		                <td><%=f.getEndereco().getUf().getDescricao() %></td>
-		                <td><%=f.getEndereco().getPais().getDescricao() %></td>
-		            </tr> 
-	            </form>
-            <%}%>          
-        </table>
+         <form action="" method="post" class="header">
+     		<input type="text" value="ID" name="id" readonly>   
+     		<input type="text" value="Empresa" name="id" readonly>   
+     		<input type="text" value="Número" name="id" readonly> 
+     		<input type="text" value="E-mail" name="id" readonly> 
+     		<input type="text" value="Produto" name="id" readonly> 
+     		<input type="text" value="Endereço" name="id" readonly> 
+     		<input type="text" value="Cidade" name="id" readonly> 
+     		<input type="text" value="UF" name="id" readonly> 
+     		<input type="text" value="País" name="id" readonly> 
+     	</form>
+         <%for(Fornecedor f:fornecedores){%>
+            	<form action="../AlterarFornecedor" method="post" class="form">
+            		<input type="text" value="<%=f.getId() %>" name="id" readonly>   
+            		<input type="text" value="<%=f.getNomeFantasia()%>" name="id" readonly>   
+            		<input type="text" value="<%=f.getContato().getTelefone().getNumber() %>" name="id" readonly> 
+            		<input type="text" value="<%=f.getContato().getEmail().getDescricao() %>" name="id" readonly> 
+            		<input type="text" value="<%=f.getProduto().getDescricao() %>" name="id" readonly> 
+            		<input type="text" value="<%=f.getEndereco().getDescricao() %>" name="id" readonly> 
+            		<input type="text" value="<%=f.getEndereco().getCidade().getDescricao() %>" name="id" readonly> 
+            		<input type="text" value="<%=f.getEndereco().getUf().getDescricao() %>" name="id" readonly> 
+            		<input type="text" value="<%=f.getEndereco().getPais().getDescricao() %>" name="id" readonly> 
+            		<input type="submit" value="EDITAR" class="btn-submit">        	
+            	</form>
+          <%} %>
+          </div>       
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script>
-    	function sendForm(){
+   		function sendForm(){
     		var form = document.getElementById("form");
     		form.submit();
     	} 

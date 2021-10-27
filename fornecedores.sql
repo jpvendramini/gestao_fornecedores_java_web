@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS cidade(
 
 CREATE TABLE IF NOT EXISTS uf(
     uf_id BIGSERIAL NOT NULL PRIMARY KEY,
-         VARCHAR(2),
+    uf_descricao VARCHAR(2),
     cdd_id BIGINT,
     CONSTRAINT fk_uf_cdd FOREIGN KEY(cdd_id) REFERENCES cidade(cdd_id)
 );

@@ -14,7 +14,8 @@ public class AlterarFornecedor extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
-		System.out.println(id);					
+		System.out.println(id);			
+		request.setAttribute("id", id);
 		request.getRequestDispatcher("/src/Alteracao.jsp").forward(request, response);	
 	}
 

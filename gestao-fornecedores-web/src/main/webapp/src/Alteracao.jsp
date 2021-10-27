@@ -18,10 +18,18 @@
 	</style>
 </head>
 <body>
+    <%@page import="fornecedor.FornecedorController" %>
+	<%@page import="fornecedor.Fornecedor" %>
     <%
 	    String username =(String) session.getAttribute("username");
 	    if(username == null){
 	        response.sendRedirect("src/login.jsp");
+	    }
+	    Long id = Long.parseLong(request.getParameter("id"));	  
+	    FornecedorController fc = new FornecedorController();
+	    Fornecedor forn = fc.getById(id);
+	    if(forn == null){
+	        response.sendRedirect("index.jsp");
 	    }
 	%>	
     <main>
@@ -32,69 +40,67 @@
                     <tr><th colspan="4" align="left"><h3>Endereço</h3></th></tr>
                     <tr>
                         <td>Endereço</td>
-                        <td><input type="text" placeholder="Endereço" name="endereco"></td>
+                        <td><input type="text" placeholder="Endereço" name="endereco" value="<%=forn.getEndereco().getDescricao() %>"></td>
                         <td>Cidade</td>
-                        <td><input type="text" placeholder="Cidade" name="cidade"></td>
+                        <td><input type="text" placeholder="Cidade" name="cidade" value="<%=forn.getEndereco().getCidade().getDescricao() %>"></td>
                     </tr>
                     <tr>
                         <td>Estado</td>
-                        <td><input type="text" placeholder="UF" name="uf"></td>
+                        <td><input type="text" placeholder="UF" name="uf" value="<%=forn.getEndereco().getUf().getDescricao() %>"></td>
                         <td>País</td>
-                        <td><input type="text" placeholder="Brasil, EUA" name="pais"></td>
+                        <td><input type="text" placeholder="Brasil, EUA" name="pais" value="<%=forn.getEndereco().getPais().getDescricao() %>"></td>
                     </tr>
                     <tr>
                     	<td>Bairro</td>
-                        <td><input type="text" placeholder="bairro" name="bairro"></td>
+                        <td><input type="text" placeholder="bairro" name="bairro" value="<%=forn.getEndereco().getBairro() %>"></td>
                         <td>Numero</td>
-                        <td><input type="number" placeholder="numero" name="numero"></td>
+                        <td><input type="number" placeholder="numero" name="numero" value="<%=forn.getEndereco().getNumero() %>"></td>
                     </tr>
                     <tr>
                     	<td>CEP</td>
-                        <td><input type="text" placeholder="cep" name="cep"></td>
+                        <td><input type="text" placeholder="cep" name="cep" value="<%=forn.getEndereco().getCep() %>"></td>
                     </tr>
                     <tr><th colspan="4" align="left"><h3>Contato</h3></th></tr>
                     <tr>
                         <td>Departamento</td>
                         <td><input type="text" placeholder="Papelaria, Marcenaria..." ></td>
                         <td>E-mail</td>
-                        <td><input type="text" name="email"></td>
+                        <td><input type="text" name="email" value="<%=forn.getContato().getEmail().getDescricao() %>"></td>
                     </tr>
                     <tr>
                         <td>Celular</td>
-                        <td><input type="number" name="codigo" style="width:50px;">
-                        <input type="number" name="ddd"style="width:50px;">
-                        <input type="number" name="telefone"style="width:100px;"></td>
+                        <td><input type="number" name="codigo" style="width:50px;" value="<%=forn.getContato().getTelefone().getCodigo() %>">
+                        <input type="number" name="ddd"style="width:50px;" value="<%=forn.getContato().getTelefone().getDdd() %>">
+                        <input type="number" name="telefone"style="width:100px;" value="<%=forn.getContato().getTelefone().getNumber() %>"></td>
                     </tr>
                     <tr><th colspan="4" align="left"><h3>Empresa</h3></th></tr>
-                    <tr>
-                        <td>OS</td>
-                        <td><input type="number"></td>
+                    <tr>                        
                         <td><input type="radio" name="tipo_empresa" checked="checked">Matriz</td>
                         <td><input type="radio" name="tipo_empresa">Filial</td>
                     </tr>
                     <tr><th colspan="4" align="left"><h3>Fornecedor</h3></th></tr>
                     <tr>
                         <td>CNAE</td>
-                        <td><input type="text" name="cnae"></td>
+                        <td><input type="text" name="cnae" value="<%=forn.getCnae().getDescricao() %>"></td>
                         <td>CNPJ</td>
-                        <td><input type="text" name="cnpj"></td>
+                        <td><input type="text" name="cnpj" value="<%=forn.getCnpj() %>"></td>
                     </tr>
                     <tr>
                         <td>Inscrição Estadual</td>
-                        <td><input type="number" name="inscricaoEstadual"></td>
+                        <td><input type="number" name="inscricaoEstadual" value="<%=forn.getInscricaoEstadual() %>"></td>
                         <td>Inscrição Municipal</td>
-                        <td><input type="number" name="inscricaoMunicipal"></td>
+                        <td><input type="number" name="inscricaoMunicipal" value="<%=forn.getInscricaoMunicipal() %>"></td>
                     </tr>
                     <tr>
                         <td>Razão Social</td>
-                        <td><input type="text" name="razaoSocial"></td>
+                        <td><input type="text" name="razaoSocial" value="<%=forn.getRazaoSocial() %>"></td>
                         <td>Nome Fantasia</td>
-                        <td><input type="text" name="nomeFantasia"></td>
+                        <td><input type="text" name="nomeFantasia" value="<%=forn.getNomeFantasia() %>"></td>
                     </tr>
                     <tr><th colspan="4" align="left"><h3>Produto</h3></th></tr>
                     <tr>
                     	<td>Produto</td>
-                        <td><input type="text" name="produto" ></td>                        
+                        <td><input type="text" name="produto" value="<%=forn.getProduto().getDescricao() %>"></td>                        
                         <td>
                         	<label>Produto</label><input type="radio" name="tipoProduto" checked="checked">
                         	<label>Serviço</label><input type="radio" name="tipoProduto">

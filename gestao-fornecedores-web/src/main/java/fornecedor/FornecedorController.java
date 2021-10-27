@@ -7,7 +7,11 @@ import dao.DAO;
 
 public class FornecedorController implements Controller<Fornecedor>{
 
-	DAO<Fornecedor> fornecedorDAO = new FornecedorDAO();
+	FornecedorDAO fornecedorDAO = new FornecedorDAO();
+	
+	public Fornecedor getById(Long id) {
+		return fornecedorDAO.findById(id);
+	}
 	
 	@Override
 	public void create(Fornecedor fornecedor) {		

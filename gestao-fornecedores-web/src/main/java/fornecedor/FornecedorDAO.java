@@ -90,7 +90,8 @@ public class FornecedorDAO implements DAO<Fornecedor>{
 				+ "JOIN endereco ON endereco.edc_id = fornecedor.edc_id\r\n"
 				+ "JOIN cidade ON cidade.edc_id = endereco.edc_id\r\n"
 				+ "JOIN uf ON uf.cdd_id = cidade.cdd_id\r\n"
-				+ "JOIN pais ON pais.uf_id = uf.uf_id WHERE fornecedor.fnc_id = 20;";
+				+ "JOIN cnae ON cnae.cne_id = fornecedor.cne_id\r\n"
+				+ "JOIN pais ON pais.uf_id = uf.uf_id WHERE fornecedor.fnc_id = ?;";
 		
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		Connection conn;
@@ -98,6 +99,7 @@ public class FornecedorDAO implements DAO<Fornecedor>{
 		try {
 			conn = FactoryDAO.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setLong(1, id);
 			ResultSet rs = stmt.executeQuery();
 			
 			while(rs.next()) {
@@ -123,7 +125,9 @@ public class FornecedorDAO implements DAO<Fornecedor>{
 				Produto prod = new Produto(rs.getString("pdt_tipo"), TipoProduto.PRODUTO);
 				prod.setId(rs.getLong("pdt_id"));
 				
-				forn = new Fornecedor(rs.getString("fnc_nome_fantasia"), end, prod, cont);
+				CNAE cnae = new CNAE(rs.getString("cne_descricao"));
+				
+				forn = new Fornecedor(rs.getInt("fnc_cnpj"),rs.getString("fnc_inscricao_estadual"),rs.getString("fnc_inscricao_municipal"),rs.getString("fnc_nome_fantasia"),rs.getString("fnc_razao_social"), end, cont, cnae, Status.RASCUNHO, prod);
 				forn.setId(rs.getLong("fnc_id"));				
 				return forn;						
 			}		

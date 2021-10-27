@@ -102,9 +102,7 @@
                         <input type="number" value="1231231231" name="telefone"style="width:100px;"></td>
                     </tr>
                     <tr><th colspan="4" align="left"><h3>Empresa</h3></th></tr>
-                    <tr>
-                        <td>OS</td>
-                        <td><input type="number" value="198291829"></td>
+                    <tr>                                               
                         <td><input type="radio" name="tipo_empresa" checked="checked">Matriz</td>
                         <td><input type="radio" name="tipo_empresa">Filial</td>
                     </tr>
