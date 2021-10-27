@@ -1,0 +1,24 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.container{
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.login{
+	max-width: 200px;
+	border-radius: 30px;
+	padding: 30px;
+	color: gray;
+}
+input{
+	padding: 10px;
+	border-radius: 30px;
+	border: none;
+	margin: 4px;
+	background: #f9f9f9;
+}

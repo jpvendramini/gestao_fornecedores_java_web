@@ -41,7 +41,7 @@ form:hover > input:nth-child(n+0):nth-child(-n+9), form:hover{
 	background: rgb(128, 255, 128);
 	color: white;
 	font-weight: bold;
-	border-radius: 20px;
+	border-radius: 5px 50px;
 }
 
 input{

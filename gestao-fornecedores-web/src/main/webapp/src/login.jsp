@@ -4,18 +4,19 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="../style/loginstyle.css">
 <title>Fornecedores | Sign in</title>
 </head>
 <body>
-	<div>
-		<div>
+	<div class="container">
+		<div class="login">
 			<h3>Sign in</h3>
 			<form action="../login" method="post">
-				<input type="text" name="username" placeholder="username" required="required">
-				<input type="password" name="password" placeholder="password" required="required">		
-				<input type="hidden" value="signin" name="flag">		
-				<input type="submit" value="Sign in">	
-				<label>Doesn't have an account yet?</label>
+				<input type="text" name="username" placeholder="username" required="required"></br>
+				<input type="password" name="password" placeholder="password" required="required"></br>		
+				<input type="hidden" value="signin" name="flag">
+				<input type="submit" value="Sign in"></br>	
+				<label>Doesn't have an account yet?</label></br>
 				<a href="signup.jsp">Create Account</a>
 			</form>
 		</div>
