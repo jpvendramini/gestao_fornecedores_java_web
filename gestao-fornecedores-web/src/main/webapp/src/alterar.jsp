@@ -81,7 +81,7 @@
      		<input type="text" value="País" name="id" readonly> 
      	</form>
          <%for(Fornecedor f:fornecedores){%>
-            	<form action="../AlterarFornecedor" method="post" class="form">
+            	<form action="../AlterarFornecedor" method="get" class="form">
             		<input type="text" value="<%=f.getId() %>" name="id" readonly>   
             		<input type="text" value="<%=f.getNomeFantasia()%>" name="id" readonly>   
             		<input type="text" value="<%=f.getContato().getTelefone().getNumber() %>" name="id" readonly> 

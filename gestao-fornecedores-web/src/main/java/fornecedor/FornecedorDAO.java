@@ -189,41 +189,111 @@ public class FornecedorDAO implements DAO<Fornecedor>{
 		} catch (SQLException e) { 
 			e.printStackTrace();
 		}
-		
-		
 		return fornecedores;
 	}
 
 	@Override
-	public void edit(Fornecedor fornecedor) {
-		String atualizarFornecedor = "UPDATE fornecedor\r\n"
-				+ "SET fnc_cnpj = ?, fnc_inscricao_estadual = ?, fnc_inscricao_municipal = ?, fnc_nome_fantasia = ?, fnc_razao_social = ?\r\n"
-				+ "WHERE fnc_id = ?";
-		String atualizaCnae = "UPDATE cnae \r\n"
-				+ "SET cne_descricao = ?\r\n"
-				+ "WHERE cne_id = ?";
-		String atualizaProduto = "UPDATE produto\r\n"
-				+ "SET pdt_tipo = ?\r\n"
-				+ "WHERE pdt_id = ?";
-		String atualizaEndereco = "UPDATE endereco\r\n"
-				+ "SET edc_bairro = ?, edc_numero = ?, edc_cep = ?, edc_descricao = ?\r\n"
-				+ "WHERE edc_id = ?";
-		String atualizaCidade = "UPDATE cidade\r\n"
-				+ "SET cdd_descricao = ?\r\n"
-				+ "WHERE cdd_id = ?";
-		String atualizaUF = "UPDATE uf\r\n"
-				+ "SET uf_descricao = ?\r\n"
-				+ "WHERE uf_id = ?";
-		String atualizaPais = "UPDATE pais\r\n"
-				+ "SET pas_descricao = ?\r\n"
-				+ "WHERE pas_id = ?";
-		String atualizaEmail = "UPDATE email\r\n"
-				+ "SET eml_email = ?\r\n"
-				+ "WHERE eml_id = ?";
-		String atualizaTelefone = "\r\n"
-				+ "UPDATE telefone\r\n"
-				+ "SET tlf_codigo = ?, tlf_ddd = ?, tlf_numero = ?, tlf_tipo = ?\r\n"
-				+ "WHERE tlf_id = ?";
+	public void edit(Fornecedor f) {
+		try {
+			String atualizarFornecedor = "UPDATE fornecedor\r\n"
+					+ "SET fnc_cnpj = ?, fnc_inscricao_estadual = ?, fnc_inscricao_municipal = ?, fnc_nome_fantasia = ?, fnc_razao_social = ?\r\n"
+					+ "WHERE fnc_id = ?";
+			Connection conn = FactoryDAO.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(atualizarFornecedor);
+			stmt.setLong(1, f.getCnpj());
+			stmt.setString(2, f.getInscricaoEstadual());
+			stmt.setString(3, f.getInscricaoMunicipal());
+			stmt.setString(4, f.getNomeFantasia());
+			stmt.setString(4, f.getRazaoSocial());
+			stmt.setLong(5, f.getId());
+			stmt.execute();
+			stmt.close();
+			
+			String atualizaCnae = "UPDATE cnae \r\n"
+					+ "SET cne_descricao = ?\r\n"
+					+ "WHERE cne_id = ?";
+			stmt = conn.prepareStatement(atualizaCnae);
+			stmt.setString(1, f.getCnae().getDescricao());
+			stmt.setLong(2, f.getCnae().getId());
+			stmt.execute();
+			stmt.close();
+			
+			String atualizaProduto = "UPDATE produto\r\n"
+					+ "SET pdt_tipo = ?\r\n"
+					+ "WHERE pdt_id = ?";
+			stmt = conn.prepareStatement(atualizaProduto);
+			stmt.setString(1, f.getProduto().getDescricao());
+			stmt.setLong(2, f.getProduto().getId());
+			stmt.execute();
+			stmt.close();
+			
+			String atualizaEndereco = "UPDATE endereco\r\n"
+					+ "SET edc_bairro = ?, edc_numero = ?, edc_cep = ?, edc_descricao = ?\r\n"
+					+ "WHERE edc_id = ?";
+			stmt = conn.prepareStatement(atualizaEndereco);
+			stmt.setString(1, f.getEndereco().getBairro());
+			stmt.setString(2, f.getEndereco().getNumero());
+			stmt.setString(3, f.getEndereco().getCep());
+			stmt.setString(4, f.getEndereco().getDescricao());
+			stmt.setLong(5, f.getEndereco().getId());
+			stmt.execute();
+			stmt.close();
+			
+			String atualizaCidade = "UPDATE cidade\r\n"
+					+ "SET cdd_descricao = ?\r\n"
+					+ "WHERE cdd_id = ?";
+			stmt = conn.prepareStatement(atualizaCidade);
+			stmt.setString(1, f.getEndereco().getCidade().getDescricao());
+			stmt.setLong(2, f.getEndereco().getCidade().getId());
+			stmt.execute();
+			stmt.close();
+			
+			String atualizaUF = "UPDATE uf\r\n"
+					+ "SET uf_descricao = ?\r\n"
+					+ "WHERE uf_id = ?";
+			stmt = conn.prepareStatement(atualizaUF);
+			stmt.setString(1, f.getEndereco().getUf().getDescricao());
+			stmt.setLong(2, f.getEndereco().getUf().getId());
+			stmt.execute();
+			stmt.close();
+			
+			String atualizaPais = "UPDATE pais\r\n"
+					+ "SET pas_descricao = ?\r\n"
+					+ "WHERE pas_id = ?";
+			stmt = conn.prepareStatement(atualizaPais);
+			stmt.setString(1, f.getEndereco().getPais().getDescricao());
+			stmt.setLong(2, f.getEndereco().getPais().getId());
+			stmt.execute();
+			stmt.close();
+			
+			String atualizaEmail = "UPDATE email\r\n"
+					+ "SET eml_email = ?\r\n"
+					+ "WHERE eml_id = ?";
+			stmt = conn.prepareStatement(atualizaEmail);
+			stmt.setString(1, f.getContato().getEmail().getDescricao());
+			stmt.setLong(2, f.getContato().getEmail().getId());
+			stmt.execute();
+			stmt.close();
+			
+			String atualizaTelefone = "\r\n"
+					+ "UPDATE telefone\r\n"
+					+ "SET tlf_codigo = ?, tlf_ddd = ?, tlf_numero = ?, tlf_tipo = ?\r\n"
+					+ "WHERE tlf_id = ?";
+			stmt = conn.prepareStatement(atualizaTelefone);
+			stmt.setInt(1, f.getContato().getTelefone().getCodigo());
+			stmt.setInt(2, f.getContato().getTelefone().getDdd());
+			stmt.setString(3, f.getContato().getTelefone().getNumber());
+			stmt.setString(4, f.getContato().getTelefone().getTipo().name());
+			stmt.setLong(5, f.getContato().getTelefone().getId());
+			stmt.execute();
+			stmt.close();
+			
+			System.out.println("Fornecedor atualizado com sucesso!");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

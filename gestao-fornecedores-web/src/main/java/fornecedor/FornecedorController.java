@@ -31,9 +31,8 @@ public class FornecedorController implements Controller<Fornecedor>{
 	}
 
 	@Override
-	public void edit(Fornecedor object) {
-		// TODO Auto-generated method stub
-		
+	public void edit(Fornecedor f) {
+		fornecedorDAO.edit(f);
 	}
 
 }
