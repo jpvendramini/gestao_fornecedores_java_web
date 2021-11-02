@@ -5,16 +5,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class FactoryDAO {	
-	public static Connection getConnection() throws SQLException{		
-		String url = "jdbc:postgresql://localhost:5432/fornecedores";
-		String username = "postgres";
-		String password = "admin123";
-        try {
-        	Class.forName("org.postgresql.Driver");                      
-        	System.out.println("Connection established with the database!!");
-            return DriverManager.getConnection(url, username, password);                         
-       } catch (ClassNotFoundException | SQLException e) {    	              
-           throw new SQLException();
-       }     
+	private static Connection conn = null;
+	public static Connection getConnection() throws SQLException{
+		if (conn == null) {
+			String url = "jdbc:postgresql://localhost:5432/fornecedores";
+			String username = "postgres";
+			String password = "admin123";		
+	        try {
+	        	Class.forName("org.postgresql.Driver");                      
+	        	System.out.println("Connection established with the database!!");
+	        	conn = DriverManager.getConnection(url, username, password);                         
+	            return conn;
+	       } catch (ClassNotFoundException | SQLException e) {    	              
+	           throw new SQLException();
+	       }     
+		}else {			
+			return conn;
+		}
     } 	
 }

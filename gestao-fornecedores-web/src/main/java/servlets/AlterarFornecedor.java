@@ -113,6 +113,6 @@ public class AlterarFornecedor extends HttpServlet {
 		
 		System.out.println(forn.toString());
 		
-		response.sendRedirect("../index.jsp");
+		response.sendRedirect("index.jsp");
 	}
 }

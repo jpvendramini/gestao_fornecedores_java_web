@@ -87,6 +87,7 @@
                     <tr><th colspan="4" align="left"><h3>Fornecedor</h3></th></tr>
                     <tr>
                         <td>CNAE</td>
+                        <input type="hidden" name="fornecedorId" value="<%=forn.getId()%>">
                         <input type="hidden" name="cnaeId" value="<%=forn.getCnae().getId()%>">
                         <td><input type="text" name="cnae" value="<%=forn.getCnae().getDescricao() %>"></td>
                         <td>CNPJ</td>

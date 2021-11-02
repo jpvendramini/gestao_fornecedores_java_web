@@ -74,9 +74,16 @@ public class FornecedorDAO implements DAO<Fornecedor>{
 	}
 
 	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-		
+	public void delete(Fornecedor f) {
+		Connection conn;
+		String sql = "";
+		try {
+			conn = FactoryDAO.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public Fornecedor findById(Long id) {
@@ -125,7 +132,8 @@ public class FornecedorDAO implements DAO<Fornecedor>{
 				Produto prod = new Produto(rs.getString("pdt_tipo"), TipoProduto.PRODUTO);
 				prod.setId(rs.getLong("pdt_id"));
 				
-				CNAE cnae = new CNAE(rs.getString("cne_descricao"));
+				CNAE cnae = new CNAE(rs.getString("cne_descricao"));				
+				cnae.setId(rs.getLong("cne_id"));
 				
 				forn = new Fornecedor(rs.getInt("fnc_cnpj"),rs.getString("fnc_inscricao_estadual"),rs.getString("fnc_inscricao_municipal"),rs.getString("fnc_nome_fantasia"),rs.getString("fnc_razao_social"), end, cont, cnae, Status.RASCUNHO, prod);
 				forn.setId(rs.getLong("fnc_id"));				
@@ -204,8 +212,8 @@ public class FornecedorDAO implements DAO<Fornecedor>{
 			stmt.setString(2, f.getInscricaoEstadual());
 			stmt.setString(3, f.getInscricaoMunicipal());
 			stmt.setString(4, f.getNomeFantasia());
-			stmt.setString(4, f.getRazaoSocial());
-			stmt.setLong(5, f.getId());
+			stmt.setString(5, f.getRazaoSocial());
+			stmt.setLong(6, f.getId());
 			stmt.execute();
 			stmt.close();
 			
