@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import dao.DAO;
+import dao.IDAO;
 import dao.FactoryDAO;
 
-public class EnderecoDAO implements DAO<Endereco>{
+public class EnderecoDAO implements IDAO<Endereco>{
 
 	public static long createEndereco(Endereco endereco) {
 		long enderecoId = 0;
@@ -95,7 +95,7 @@ public class EnderecoDAO implements DAO<Endereco>{
 	}
 
 	@Override
-	public void delete() {
+	public void delete(Endereco endereco) {
 		// TODO Auto-generated method stub
 		
 	}

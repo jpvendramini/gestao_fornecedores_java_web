@@ -3,8 +3,8 @@ package contato;
 import dominio.Dominio;
 
 public class Telefone extends Dominio {
-	private int codigo;
-	private int ddd;
+	private String codigo;
+	private String ddd;
 	private String number;
 	private TipoTelefone tipo;
 	
@@ -13,7 +13,7 @@ public class Telefone extends Dominio {
 		this.number = number;
 	}
 	
-	public Telefone(int codigo, int ddd, String number, TipoTelefone tipo) {
+	public Telefone(String codigo, String ddd, String number, TipoTelefone tipo) {
 		super();
 		this.codigo = codigo;
 		this.ddd = ddd;
@@ -21,19 +21,19 @@ public class Telefone extends Dominio {
 		this.tipo = tipo;
 	}
 
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
-	public int getDdd() {
+	public String getDdd() {
 		return ddd;
 	}
 
-	public void setDdd(int ddd) {
+	public void setDdd(String ddd) {
 		this.ddd = ddd;
 	}
 

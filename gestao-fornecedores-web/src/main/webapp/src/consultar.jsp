@@ -12,22 +12,22 @@
     <title>Fornecedores | Consultar</title>
 </head>
 <body>
-	<%@page import="fornecedor.FornecedorController" %>
+	<%@page import="fornecedor.FornecedorFacade" %>
 	<%@page import="fornecedor.Fornecedor" %>
 	<%@page import="java.util.List" %>
     <%
-	    String username =(String) session.getAttribute("username");
-	    if(username == null){
-	        response.sendRedirect("login.jsp");
-	    }
-	    
-	    FornecedorController forn = new FornecedorController(); 
-	    
-	    List<Fornecedor> fornecedores = forn.findAll();
-	    if(!fornecedores.isEmpty()){
-	    	request.setAttribute("fornecedores", fornecedores);	    	
-	    }
-	%>
+    String username =(String) session.getAttribute("username");
+    	    if(username == null){
+    	        response.sendRedirect("login.jsp");
+    	    }
+    	    
+    	    FornecedorFacade forn = new FornecedorFacade(); 
+    	    
+    	    List<Fornecedor> fornecedores = forn.findAll();
+    	    if(!fornecedores.isEmpty()){
+    	    	request.setAttribute("fornecedores", fornecedores);	    	
+    	    }
+    %>
     <header >
         <div class="navigation">
             <ul>

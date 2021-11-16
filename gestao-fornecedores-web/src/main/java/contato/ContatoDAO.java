@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import dao.DAO;
+import dao.IDAO;
 import dao.FactoryDAO;
 
-public class ContatoDAO implements DAO<Contato>{
+public class ContatoDAO implements IDAO<Contato>{
 	public static void createTelefone(Telefone telefone, long fornecedorId) {
 		String telefoneSql = "INSERT INTO telefone(tlf_codigo, tlf_ddd, tlf_numero, tlf_tipo) VALUES(?, ?, ?, ?)";		
 		String telefoneForSql = "INSERT INTO telefone_fornecedor(fnc_id, tlf_id) VALUES(?, ?)";
@@ -18,8 +18,8 @@ public class ContatoDAO implements DAO<Contato>{
 		try {
 			Connection conn = FactoryDAO.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(telefoneSql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1, telefone.getCodigo());
-			stmt.setInt(2, telefone.getDdd());
+			stmt.setString(1, telefone.getCodigo());
+			stmt.setString(2, telefone.getDdd());
 			stmt.setString(3, telefone.getNumber());
 			stmt.setString(4, telefone.getTipo().name());
 			stmt.execute();
@@ -78,7 +78,7 @@ public class ContatoDAO implements DAO<Contato>{
 	}
 
 	@Override
-	public void delete() {
+	public void delete(Contato contato) {
 		// TODO Auto-generated method stub
 		
 	}

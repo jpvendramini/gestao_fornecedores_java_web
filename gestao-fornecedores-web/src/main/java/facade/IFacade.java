@@ -1,8 +1,8 @@
-package controller;
+package facade;
 
 import java.util.List;
 
-public interface Controller<T> {
+public interface IFacade<T> {
 	void create(T t);
 	void delete(T t);
 	List<T> findAll();

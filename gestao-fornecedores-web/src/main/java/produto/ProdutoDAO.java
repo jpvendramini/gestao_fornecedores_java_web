@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import dao.DAO;
+import dao.IDAO;
 import dao.FactoryDAO;
 
-public class ProdutoDAO implements DAO<Produto>{
+public class ProdutoDAO implements IDAO<Produto>{
 	
 	
 	public static long insertProduto(Produto produto) {
@@ -48,7 +48,7 @@ public class ProdutoDAO implements DAO<Produto>{
 	}
 
 	@Override
-	public void delete() {
+	public void delete(Produto t) {
 		// TODO Auto-generated method stub
 		
 	}

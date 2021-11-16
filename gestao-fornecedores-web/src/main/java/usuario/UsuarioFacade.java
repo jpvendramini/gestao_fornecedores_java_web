@@ -2,9 +2,9 @@ package usuario;
 
 import java.util.List;
 
-import controller.Controller;
+import facade.IFacade;
 
-public class UsuarioController implements Controller{
+public class UsuarioFacade implements IFacade{
 
 	@Override
 	public void create(Object object) {

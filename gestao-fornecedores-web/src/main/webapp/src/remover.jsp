@@ -14,12 +14,22 @@
     <title>Fornecedores | Remover</title>
 </head>
 <body>
+    <%@page import="fornecedor.FornecedorFacade" %>
+	<%@page import="fornecedor.Fornecedor" %>
+	<%@page import="java.util.List" %>
     <%
-	    String username =(String) session.getAttribute("username");
-	    if(username == null){
-	        response.sendRedirect("login.jsp");
-	    }
-	%>
+    String username =(String) session.getAttribute("username");
+    	    if(username == null){
+    	        response.sendRedirect("login.jsp");
+    	    }
+    	    
+    	    FornecedorFacade forn = new FornecedorFacade(); 
+    	    
+    	    List<Fornecedor> fornecedores = forn.findAll();
+    	    if(!fornecedores.isEmpty()){
+    	    	request.setAttribute("fornecedores", fornecedores);	    	
+    	    }
+    %>
     <header >
         <div class="navigation">
             <ul>
@@ -56,88 +66,44 @@
             </ul>
         </div>
     </header>
-    <div class="container">
-        <h2>Remover Fornecedores</h2>   
-        <table>         
-        	<td colspan="9" align="center"><i class="fas fa-trash-alt fa-2x"></i></td>      
-            <tr>
-                <td><input type="checkbox" id="select_all"></td>
-                <th>Empresa</th>
-                <th>NÃºmero</th>
-                <th>E-mail</th>
-                <th>Produto</th>
-                <th>EndereÃ§o</th>
-                <th>Cidade</th>
-                <th>PaÃ­s</th>
-                <th>Tipo</th>                
-            </tr>
-            <tr class="fornecedor">
-                <td><input type="checkbox" class="checkbox-size"></td>
-                <td >Dundler Miffin</td>          
-                <td>11090-12901</td>
-                <td>dunder@gmail.com</td>
-                <td>Papel</td>
-                <td>Avenida Scranton</td>
-                <td>Scranton</td>
-                <td>Estados Unidos</td>
-                <td>Filial</td>
-            </tr>            
-            <tr class="fornecedor">
-                <td><input type="checkbox" class="checkbox-size"></td>
-                <td >Dundler Miffin</td>          
-                <td>11090-12901</td>
-                <td>dunder@gmail.com</td>
-                <td>Papel</td>
-                <td>Avenida Scranton</td>
-                <td>Scranton</td>
-                <td>Estados Unidos</td>
-                <td>Filial</td>
-            </tr>    
-            <tr class="fornecedor">
-                <td><input type="checkbox" class="checkbox-size"></td>
-                <td >Dundler Miffin</td>          
-                <td>11090-12901</td>
-                <td>dunder@gmail.com</td>
-                <td>Papel</td>
-                <td>Avenida Scranton</td>
-                <td>Scranton</td>
-                <td>Estados Unidos</td>
-                <td>Filial</td>
-            </tr>    
-            <tr class="fornecedor">
-                <td><input type="checkbox" class="checkbox-size"></td>
-                <td >Dundler Miffin</td>          
-                <td>11090-12901</td>
-                <td>dunder@gmail.com</td>
-                <td>Papel</td>
-                <td>Avenida Scranton</td>
-                <td>Scranton</td>
-                <td>Estados Unidos</td>
-                <td>Filial</td>
-            </tr>                     
-        </table>        
+        <div class="container">
+        <div class="container" >  
+	        <h2>Remover Fornecedores</h2>   
+	     	<table>
+	     		<tr>
+		     		<th>ID</th>
+		     		<th>Empresa</th>
+		     		<th>Número</th>
+		     		<th>E-mail</th>
+		     		<th>Produto</th>
+		     		<th>Endereço</th>
+		     		<th>Cidade</th>
+		     		<th>UF</th>
+		     		<th>País</th>
+		     		<th>Remover</th>
+	     		</tr>
+	     		<%for(Fornecedor f:fornecedores){%>
+	     		<tr>
+	     			<td><%=f.getId() %></td>
+	     			<td><%=f.getNomeFantasia()%></td>
+	     			<td><%=f.getContato().getTelefone().getNumber() %></td>
+	     			<td><%=f.getContato().getEmail().getDescricao() %></td>
+	     			<td><%=f.getProduto().getDescricao() %></td>     
+	     			<td><%=f.getEndereco().getDescricao() %></td>		
+	     			<td><%=f.getEndereco().getCidade().getDescricao() %></td>
+	     			<td><%=f.getEndereco().getUf().getDescricao() %></td>
+	     			<td><%=f.getEndereco().getPais().getDescricao() %></td>
+	     			<td><input type="button" onclick="remove(<%=f.getId() %>)" value="Remover" class="btn-remove" style="width: 100%"></td>
+	     		</tr>
+	     		<%} %>
+	     	</table>
+	     </div>     
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script>
-        $('#select_all').click(function() {
-            var c = this.checked;
-            $(':checkbox').prop('checked', c);
-        });
-
-        $(".checkbox-size").click(function(){
-            if($('.checkbox-size').is(':checked')){                
-                $(this).closest('tr').css("background-color", "rgb(216, 79, 79)");
-            }else{
-                $(this).closest('tr').css("background-color", "rgb(240, 240, 240)");
-            }
-        });
-        $("#select_all").click(function(){
-            if($('#select_all').is(':checked')){
-                $(".checkbox-size").closest('tr').css("background-color", "rgb(216, 79, 79)");
-            }else{
-                $(".checkbox-size").closest('tr').css("background-color", "rgb(240, 240, 240)");
-            }
-        });
+   		function remove(id){
+   			location.href="/gestao-fornecedores-web/RemoverFornecedor?id="+id;
+   		}
     </script>
 </body>
 </html>

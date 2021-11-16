@@ -18,20 +18,20 @@
 	</style>
 </head>
 <body>
-    <%@page import="fornecedor.FornecedorController" %>
+    <%@page import="fornecedor.FornecedorFacade" %>
 	<%@page import="fornecedor.Fornecedor" %>
     <%
-	    String username =(String) session.getAttribute("username");
-	    if(username == null){
-	        response.sendRedirect("src/login.jsp");
-	    }
-	    Long id = Long.parseLong(request.getParameter("id"));	  
-	    FornecedorController fc = new FornecedorController();
-	    Fornecedor forn = fc.getById(id);
-	    if(forn == null){
-	        response.sendRedirect("index.jsp");
-	    }
-	%>	
+    String username =(String) session.getAttribute("username");
+    	    if(username == null){
+    	        response.sendRedirect("src/login.jsp");
+    	    }
+    	    Long id = Long.parseLong(request.getParameter("id"));	  
+    	    FornecedorFacade fc = new FornecedorFacade();
+    	    Fornecedor forn = fc.getById(id);
+    	    if(forn == null){
+    	        response.sendRedirect("index.jsp");
+    	    }
+    %>	
     <main>
         <div class="container">
             <h2>Cadastro de Fornecedores</h2>
@@ -75,7 +75,7 @@
                     <tr>
                         <td>Celular</td>
                         <input type="hidden" name="telefoneId" value="<%=forn.getContato().getTelefone().getId() %>">
-                        <td><input type="number" name="codigo" style="width:50px;" value="<%=forn.getContato().getTelefone().getCodigo() %>">
+                        <td><input type="text" name="codigo" style="width:50px;" value="<%=forn.getContato().getTelefone().getCodigo() %>">
                         <input type="number" name="ddd"style="width:50px;" value="<%=forn.getContato().getTelefone().getDdd() %>">
                         <input type="number" name="telefone"style="width:100px;" value="<%=forn.getContato().getTelefone().getNumber() %>"></td>
                     </tr>

@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import dao.DAO;
+import dao.IDAO;
 import dao.FactoryDAO;
 
-public class CNAEDAO implements DAO<CNAE>{
+public class CNAEDAO implements IDAO<CNAE>{
 	
 	public static long insertCnae(CNAE cnae) {
 		String cnaeSql = "INSERT INTO cnae(cne_descricao) VALUES(?)";
@@ -41,7 +41,7 @@ public class CNAEDAO implements DAO<CNAE>{
 	}
 
 	@Override
-	public void delete() {
+	public void delete(CNAE cnae) {
 		// TODO Auto-generated method stub
 		
 	}

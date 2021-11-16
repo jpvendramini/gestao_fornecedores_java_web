@@ -2,9 +2,9 @@ package usuario;
 
 import java.util.List;
 
-import dao.DAO;
+import dao.IDAO;
 
-public class UsuarioDAO implements DAO<Usuario>{
+public class UsuarioDAO implements IDAO<Usuario>{
 
 	@Override
 	public void create(Usuario usuario) {
@@ -13,7 +13,7 @@ public class UsuarioDAO implements DAO<Usuario>{
 	}
 
 	@Override
-	public void delete() {
+	public void delete(Usuario usuario) {
 		// TODO Auto-generated method stub
 		
 	}

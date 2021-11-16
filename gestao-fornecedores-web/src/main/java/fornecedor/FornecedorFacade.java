@@ -1,11 +1,14 @@
 package fornecedor;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import controller.Controller;
-import dao.DAO;
+import dao.IDAO;
+import facade.IFacade;
+import strategy.IStrategy;
 
-public class FornecedorController implements Controller<Fornecedor>{
+public class FornecedorFacade implements IFacade<Fornecedor>{
 
 	FornecedorDAO fornecedorDAO = new FornecedorDAO();
 	
@@ -14,15 +17,15 @@ public class FornecedorController implements Controller<Fornecedor>{
 	}
 	
 	@Override
-	public void create(Fornecedor fornecedor) {		
+	public void create(Fornecedor fornecedor) {
+		Map<String, List<IStrategy>> strategies = new HashMap<String, List<IStrategy>>();
 		fornecedorDAO.create(fornecedor);
 		System.out.println(fornecedorDAO.findAll());		
 	}
 
 	@Override
-	public void delete(Fornecedor object) {
-		// TODO Auto-generated method stub
-		
+	public void delete(Fornecedor f) {
+		fornecedorDAO.delete(f);		
 	}
 
 	@Override

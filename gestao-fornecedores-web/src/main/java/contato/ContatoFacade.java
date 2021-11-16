@@ -1,31 +1,31 @@
-package endereco;
+package contato;
 
 import java.util.List;
 
-import controller.Controller;
+import facade.IFacade;
 
-public class EnderecoController implements Controller{
+public class ContatoFacade implements IFacade<Contato>{
 
 	@Override
-	public void create(Object object) {
+	public void create(Contato contato) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(Object object) {
+	public void delete(Contato contato) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public List<Object> findAll() {
+	public List<Contato> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void edit(Object object) {
+	public void edit(Contato contato) {
 		// TODO Auto-generated method stub
 		
 	}

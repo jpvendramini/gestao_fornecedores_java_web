@@ -26,55 +26,26 @@
 table{
 	box-shadow: 5px 10px 10px #ffffff26;
 }
-
-form{
-	border-radius: 0px;
-	background: white;
-	padding: 20px;
-	cursor:auto;
-}
-form:hover > input:nth-child(n+0):nth-child(-n+9), form:hover{
-	background: #ebebeb;
-}
-.btn-submit{
+.btn-edit{
 	cursor: pointer;
-	background: rgb(128, 255, 128);
-	color: white;
-	font-weight: bold;
-	border-radius: 5px 50px;
-}
-
-input{
-	padding: 5px;
-	border: 0px;
-	font-size: 1em;
-	cursor: context-menu;
-}
-
-input:nth-child(1) {	
-	width:5%;
-}
-
-input:nth-child(2) {
+	background: lightgreen;
+	color: black;
+	font-weight: bold;	
 	border: none;
-	width:9%;
+	padding: 10px;
 }
-
-input:nth-child(n+3):nth-child(-n+6) {
-	border: none;
-	width:15%;
-}
-
-input:nth-child(7) {
-	border: none;
-	width:9%;
-}
-
-input:nth-child(n+8):nth-child(-n+9) {
-	border: none;
-	width:3%;
-}
-
 .header input{
 	font-weight: bold;
+}
+
+td, th{
+	padding: 10px;	
+	
+}
+
+td:nth-child(n+1):nth-child(-n+9) {
+	
+}
+
+tr:nth-child(2n+1){
 }

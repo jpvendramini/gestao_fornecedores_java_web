@@ -6,7 +6,7 @@ import endereco.Endereco;
 import produto.Produto;
 
 public class Fornecedor extends Dominio{
-	private int cnpj;
+	private String cnpj;
 	private String inscricaoEstadual;
 	private String inscricaoMunicipal;
 	private String nomeFantasia;
@@ -28,7 +28,7 @@ public class Fornecedor extends Dominio{
 		this.contato = contato;
 	}
 	
-	public Fornecedor(int cnpj, String inscricaoEstadual, String inscricaoMunicipal, String nomeFantasia,
+	public Fornecedor(String cnpj, String inscricaoEstadual, String inscricaoMunicipal, String nomeFantasia,
 			String razaoSocial, Endereco endereco, CNAE cnae, Produto produto, Contato contato) {
 		super();
 		this.cnpj = cnpj;
@@ -42,7 +42,7 @@ public class Fornecedor extends Dominio{
 		this.contato = contato;
 	}
 
-	public Fornecedor(int cnpj, String inscricaoEstadual, String inscricaoMunicipal, String nomeFantasia,
+	public Fornecedor(String cnpj, String inscricaoEstadual, String inscricaoMunicipal, String nomeFantasia,
 			String razaoSocial, Endereco endereco, Contato contato, CNAE cnae, Status status, Produto produto) {
 		super();
 		this.cnpj = cnpj;
@@ -57,11 +57,11 @@ public class Fornecedor extends Dominio{
 		this.produto = produto;
 	}
 
-	public int getCnpj() {
+	public String getCnpj() {
 		return cnpj;
 	}
 
-	public void setCnpj(int cnpj) {
+	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
 

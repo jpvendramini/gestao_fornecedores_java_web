@@ -13,7 +13,7 @@ import contato.ContatoDAO;
 import contato.Email;
 import contato.Telefone;
 import contato.TipoTelefone;
-import dao.DAO;
+import dao.IDAO;
 import dao.FactoryDAO;
 import endereco.Cidade;
 import endereco.Endereco;
@@ -24,7 +24,7 @@ import produto.Produto;
 import produto.ProdutoDAO;
 import produto.TipoProduto;
 
-public class FornecedorDAO implements DAO<Fornecedor>{
+public class FornecedorDAO implements IDAO<Fornecedor>{
 	@Override
 	public void create(Fornecedor fornecedor) {		
 		String fornecedorSql = "INSERT INTO fornecedor(fnc_cnpj, fnc_inscricao_estadual, fnc_inscricao_municipal, fnc_nome_fantasia, fnc_razao_social, cne_id, pdt_id, edc_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
@@ -43,7 +43,7 @@ public class FornecedorDAO implements DAO<Fornecedor>{
 			
 			ResultSet rs = stmt.getGeneratedKeys();
 			stmt = conn.prepareStatement(fornecedorSql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setLong(1, fornecedor.getCnpj());
+			stmt.setString(1, fornecedor.getCnpj());
 			stmt.setString(2, fornecedor.getInscricaoEstadual());
 			stmt.setString(3, fornecedor.getInscricaoMunicipal());
 			stmt.setString(4, fornecedor.getNomeFantasia());
@@ -76,11 +76,65 @@ public class FornecedorDAO implements DAO<Fornecedor>{
 	@Override
 	public void delete(Fornecedor f) {
 		Connection conn;
-		String sql = "";
+		String deleteCnae = "DELETE FROM cnae WHERE cne_id = ?";
+		String deleteProduto= "DELETE FROM produto WHERE pdt_id = ?";
+		String deletePais = "DELETE FROM pais WHERE pas_id = ?";
+		String deleteUf = "DELETE FROM uf WHERE uf_id = ?";
+		String deleteCidade = "DELETE FROM cidade WHERE cdd_id = ?";
+		String deleteEndereco= "DELETE FROM endereco WHERE edc_id = ?";
+		String deleteTeleF= "DELETE FROM telefone_fornecedor WHERE tlf_id = ?";
+		String deleteTelefone= "DELETE FROM telefone WHERE tlf_id= ?";
+		String deleteEmailF= "DELETE FROM email_fornecedor WHERE eml_id = ?";
+		String deleteEmail= "DELETE FROM email WHERE eml_id = ?";		
+		String deleteFornecedor= "DELETE FROM fornecedor WHERE fnc_id = ?";
 		try {
 			conn = FactoryDAO.getConnection();
-			PreparedStatement stmt = conn.prepareStatement(sql);
+			PreparedStatement stmt = null;
 			
+			stmt = conn.prepareStatement(deletePais);
+			stmt.setLong(1, f.getEndereco().getPais().getId());
+			stmt.execute();
+			
+			stmt = conn.prepareStatement(deleteUf);
+			stmt.setLong(1, f.getEndereco().getUf().getId());
+			stmt.execute();
+			
+			stmt = conn.prepareStatement(deleteCidade);
+			stmt.setLong(1, f.getEndereco().getCidade().getId());
+			stmt.execute();
+			
+			stmt = conn.prepareStatement(deleteTeleF);
+			stmt.setLong(1, f.getContato().getTelefone().getId());
+			stmt.execute();
+			
+			stmt = conn.prepareStatement(deleteTelefone);
+			stmt.setLong(1, f.getContato().getTelefone().getId());
+			stmt.execute();
+			
+			stmt = conn.prepareStatement(deleteEmailF);
+			stmt.setLong(1, f.getContato().getEmail().getId());
+			stmt.execute();
+			
+			stmt = conn.prepareStatement(deleteEmail);
+			stmt.setLong(1, f.getContato().getEmail().getId());
+			stmt.execute();
+			
+			stmt = conn.prepareStatement(deleteFornecedor);
+			stmt.setLong(1, f.getId());
+			stmt.execute();
+			
+			stmt = conn.prepareStatement(deleteCnae);
+			stmt.setLong(1, f.getCnae().getId());
+			stmt.execute();
+			
+			stmt = conn.prepareStatement(deleteProduto);
+			stmt.setLong(1, f.getProduto().getId());
+			stmt.execute();
+			
+			stmt = conn.prepareStatement(deleteEndereco);
+			stmt.setLong(1, f.getEndereco().getId());
+			stmt.execute();
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -113,7 +167,7 @@ public class FornecedorDAO implements DAO<Fornecedor>{
 				Email email = new Email();
 				email.setDescricao(rs.getString("eml_email"));
 				email.setId(rs.getLong("eml_id"));
-				Telefone tel = new Telefone(rs.getInt("tlf_codigo"), rs.getInt("tlf_ddd"), rs.getString("tlf_numero"), TipoTelefone.CELULAR);
+				Telefone tel = new Telefone(rs.getString("tlf_codigo"), rs.getString("tlf_ddd"), rs.getString("tlf_numero"), TipoTelefone.CELULAR);
 				tel.setId(rs.getLong("tlf_id"));
 				Contato cont = new Contato(email, tel);
 				
@@ -135,7 +189,7 @@ public class FornecedorDAO implements DAO<Fornecedor>{
 				CNAE cnae = new CNAE(rs.getString("cne_descricao"));				
 				cnae.setId(rs.getLong("cne_id"));
 				
-				forn = new Fornecedor(rs.getInt("fnc_cnpj"),rs.getString("fnc_inscricao_estadual"),rs.getString("fnc_inscricao_municipal"),rs.getString("fnc_nome_fantasia"),rs.getString("fnc_razao_social"), end, cont, cnae, Status.RASCUNHO, prod);
+				forn = new Fornecedor(rs.getString("fnc_cnpj"),rs.getString("fnc_inscricao_estadual"),rs.getString("fnc_inscricao_municipal"),rs.getString("fnc_nome_fantasia"),rs.getString("fnc_razao_social"), end, cont, cnae, Status.RASCUNHO, prod);
 				forn.setId(rs.getLong("fnc_id"));				
 				return forn;						
 			}		
@@ -171,7 +225,7 @@ public class FornecedorDAO implements DAO<Fornecedor>{
 				Email email = new Email();
 				email.setDescricao(rs.getString("eml_email"));
 				email.setId(rs.getLong("eml_id"));
-				Telefone tel = new Telefone(rs.getInt("tlf_codigo"), rs.getInt("tlf_ddd"), rs.getString("tlf_numero"), TipoTelefone.CELULAR);
+				Telefone tel = new Telefone(rs.getString("tlf_codigo"), rs.getString("tlf_ddd"), rs.getString("tlf_numero"), TipoTelefone.CELULAR);
 				tel.setId(rs.getLong("tlf_id"));
 				Contato cont = new Contato(email, tel);
 				
@@ -208,7 +262,7 @@ public class FornecedorDAO implements DAO<Fornecedor>{
 					+ "WHERE fnc_id = ?";
 			Connection conn = FactoryDAO.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(atualizarFornecedor);
-			stmt.setLong(1, f.getCnpj());
+			stmt.setString(1, f.getCnpj());
 			stmt.setString(2, f.getInscricaoEstadual());
 			stmt.setString(3, f.getInscricaoMunicipal());
 			stmt.setString(4, f.getNomeFantasia());
@@ -288,8 +342,8 @@ public class FornecedorDAO implements DAO<Fornecedor>{
 					+ "SET tlf_codigo = ?, tlf_ddd = ?, tlf_numero = ?, tlf_tipo = ?\r\n"
 					+ "WHERE tlf_id = ?";
 			stmt = conn.prepareStatement(atualizaTelefone);
-			stmt.setInt(1, f.getContato().getTelefone().getCodigo());
-			stmt.setInt(2, f.getContato().getTelefone().getDdd());
+			stmt.setString(1, f.getContato().getTelefone().getCodigo());
+			stmt.setString(2, f.getContato().getTelefone().getDdd());
 			stmt.setString(3, f.getContato().getTelefone().getNumber());
 			stmt.setString(4, f.getContato().getTelefone().getTipo().name());
 			stmt.setLong(5, f.getContato().getTelefone().getId());

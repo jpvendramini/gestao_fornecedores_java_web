@@ -1,11 +1,8 @@
-.checkbox-size, #select_all{
-    width: 20px;
-    height: 20px;
-}
-.fa-trash-alt{
-    color: red;
-    cursor: pointer;
-}
-.fa-trash-alt:hover{
-    color: rgb(223, 0, 0);
+.btn-remove{
+	cursor: pointer;
+	background: red;
+	color: white;
+	font-weight: bold;	
+	border: none;
+	padding: 10px;
 }

@@ -1,7 +1,6 @@
-package servlets;
+package controllers;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,79 +17,102 @@ import endereco.Pais;
 import endereco.UF;
 import fornecedor.CNAE;
 import fornecedor.Fornecedor;
-import fornecedor.FornecedorController;
-import fornecedor.FornecedorDAO;
+import fornecedor.FornecedorFacade;
 import produto.Produto;
 import produto.TipoProduto;
 
-@WebServlet("/cadastrar/fornecedor")
-public class CadastroFornecedor extends HttpServlet {
+
+@WebServlet("/AlterarFornecedor")
+public class AlterarFornecedor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		FornecedorController forn = new FornecedorController();
-		forn.findAll();
-		request.setAttribute("fornecedores", forn);
+		String id = request.getParameter("id");
+		System.out.println(id);			
+		request.setAttribute("id", id);
+		request.getRequestDispatcher("/src/Alteracao.jsp").forward(request, response);	
 	}
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		FornecedorController fornControl = new FornecedorController();
-		//FORNECEDOR]
-		int cnpj = Integer.parseInt(request.getParameter("cnpj"));
+		FornecedorFacade fornControl = new FornecedorFacade();
+		//FORNECEDOR
+		String cnpj = request.getParameter("cnpj");
 		String inscricaoEstadual =  request.getParameter("inscricaoEstadual");
 		String inscricaoMunicipal = request.getParameter("inscricaoMunicipal");
 		String nomeFantasia = request.getParameter("nomeFantasia");
 		String razaoSocial = request.getParameter("razaoSocial");
+		Long fornecedorId = Long.parseLong(request.getParameter("fornecedorId"));
 		
 		//CNAE
 		String cnae = request.getParameter("cnae");				
+		Long cnaeId = Long.parseLong(request.getParameter("cnaeId"));
 		CNAE cn = new CNAE(cnae);
+		cn.setId(cnaeId);
 		
 		//ENDERECO		
 		String endereco = request.getParameter("endereco");
 		String bairro = request.getParameter("bairro");
 		String numero = request.getParameter("numero");
 		String cep = request.getParameter("cep");
+		Long endId = Long.parseLong(request.getParameter("endId"));
 		
 		//CIDADE		
 		String cidade = request.getParameter("cidade");
+		Long cidadeId = Long.parseLong(request.getParameter("cidadeId"));
+		Cidade city = new Cidade(cidade);
+		city.setId(cidadeId);
 		
 		//UF
-		String uf = request.getParameter("uf");
+		String ufDescricao = request.getParameter("uf");
+		Long ufId = Long.parseLong(request.getParameter("ufId"));
+		UF uf = new UF(ufDescricao);
+		uf.setId(ufId);
 		
 		//PAIS
-		String pais = request.getParameter("pais");
+		String paisDescricao = request.getParameter("pais");
+		Long paisId = Long.parseLong(request.getParameter("paisId"));
+		Pais pais = new Pais(paisDescricao);
+		pais.setId(paisId);
 		
-		Endereco end = new Endereco(endereco, bairro, numero, cep, new Cidade(cidade), new UF(uf), new Pais(pais));
+		Endereco end = new Endereco(endereco, bairro, numero, cep, city, uf, pais);
+		end.setId(endId);
 		
 		//COTATO
-		String email = request.getParameter("email");		
-		int ddd = Integer.parseInt(request.getParameter("ddd"));
-		int codigo= Integer.parseInt(request.getParameter("codigo"));
+		String email = request.getParameter("email");	
+		Long emailId = Long.parseLong(request.getParameter("emailId"));
+		String ddd = request.getParameter("ddd");
+		String codigo= request.getParameter("codigo");
 		String telefone = request.getParameter("telefone");
+		Long telefoneId = Long.parseLong(request.getParameter("telefoneId"));
 		
 		Telefone tel = new Telefone(ddd, codigo, telefone, TipoTelefone.CELULAR);
+		tel.setId(telefoneId);
 		Email eml = new Email();
-		eml.setDescricao(email);
+		eml.setDescricao(email);	
+		eml.setId(emailId);
 		Contato contato = new Contato(eml, tel);
 		
 		//PRODUTO
 		String produto = request.getParameter("produto");
 		String tipoProduto = request.getParameter("tipoProduto");
+		Long produtoId = Long.parseLong(request.getParameter("produtoId"));
 		
 		Produto prod;
 		if(tipoProduto == "PRODUTO") {
-			prod = new Produto(produto, TipoProduto.PRODUTO);	
+			prod = new Produto(produto, TipoProduto.PRODUTO);			
 		}else {
-			prod = new Produto(produto, TipoProduto.SERVICO);
+			prod = new Produto(produto, TipoProduto.SERVICO);		
 		}
+		prod.setId(produtoId);
 		
 		Fornecedor forn = new Fornecedor(cnpj, inscricaoEstadual, inscricaoMunicipal, nomeFantasia, razaoSocial, end, cn, prod, contato);
+		forn.setId(fornecedorId);
 		
-		fornControl.create(forn);
+		fornControl.edit(forn);
 		
-		System.out.println(forn.toString());			
+		System.out.println(forn.toString());
 		
-		response.sendRedirect("../index.jsp");
+		response.sendRedirect("index.jsp");
 	}
-
 }
