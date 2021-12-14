@@ -2,13 +2,13 @@ package strategy;
 
 import java.util.InputMismatchException;
 
-import dominio.Dominio;
-import fornecedor.Fornecedor;
+import application.Dominio;
+import dominio.Fornecedor;
 
 public class ValidarCNPJ implements IStrategy{
 
 	@Override
-	public boolean processar(Dominio dominio) {
+	public String processar(Dominio dominio) {
 		Fornecedor f = (Fornecedor)dominio;
 		
 		if(f.getCnpj().equals("00000000000000") || f.getCnpj().equals("11111111111111") ||
@@ -17,7 +17,7 @@ public class ValidarCNPJ implements IStrategy{
 		   f.getCnpj().equals("66666666666666") || f.getCnpj().equals("77777777777777") ||
 		   f.getCnpj().equals("88888888888888") || f.getCnpj().equals("99999999999999") ||
 		   f.getCnpj() == null || f.getCnpj().length() != 14) {
-			return false;
+			return "Valores incorretos ou nao possui 14 digitos";
 		}
 		
 		char digito13 = f.getCnpj().charAt(12);
@@ -30,8 +30,9 @@ public class ValidarCNPJ implements IStrategy{
 		
 		try {
 			for(int i=11; i>=0;i--) {
-				numero = (int)(f.getCnpj().charAt(i) - 48);
+				numero = (int)(f.getCnpj().charAt(i) - 48);				
 				soma += numero * valor;
+				
 				if(valor == 10) {
 					valor = 2;
 				}else {
@@ -39,12 +40,12 @@ public class ValidarCNPJ implements IStrategy{
 				}				
 			}
 			if(soma % 11 != 0 || soma % 11 != 1) {
-				digiVerificador1 = (char)((11 - soma) + 48);
+				digiVerificador1 = (char)((11 - (soma % 11)) + 48);
 			}else {
 				digiVerificador1 = '0';
 			}
 			
-			
+			System.out.println("D1: " + digiVerificador1);
 			soma = 0;
 			for(int i=12; i>=0;i--) {
 				numero = (int)(f.getCnpj().charAt(i) - 48);
@@ -56,21 +57,21 @@ public class ValidarCNPJ implements IStrategy{
 				}	
 			}
 			if(soma % 11 != 0 || soma % 11 != 1) {
-				digiVerificador2 = (char)((11 - soma) + 48);
+				digiVerificador2 = (char)((11 - (soma % 11)) + 48);				
 			}else {
 				digiVerificador2 = '0';
 			}
 			
 			if(digiVerificador1 == digito13 && digiVerificador2 == digito14) {
-				return true;
+				return null;
 			}else {
-				return false;
+				return null;
 			}
 		}catch(InputMismatchException e) {
 			e.getMessage();
 		}
 		
-		return false;
+		return null;
 	}
 
 }

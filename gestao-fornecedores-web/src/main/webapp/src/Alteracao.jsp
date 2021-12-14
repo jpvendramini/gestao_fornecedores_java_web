@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="./style/style.css">
     <title>Fornecedores | Inserir</title>
     <style>
@@ -18,24 +19,24 @@
 	</style>
 </head>
 <body>
-    <%@page import="fornecedor.FornecedorFacade" %>
-	<%@page import="fornecedor.Fornecedor" %>
+    <%@page import="facade.Fachada" %>
+	<%@page import="dominio.Fornecedor" %>
     <%
     String username =(String) session.getAttribute("username");
-    	    if(username == null){
-    	        response.sendRedirect("src/login.jsp");
-    	    }
-    	    Long id = Long.parseLong(request.getParameter("id"));	  
-    	    FornecedorFacade fc = new FornecedorFacade();
-    	    Fornecedor forn = fc.getById(id);
-    	    if(forn == null){
-    	        response.sendRedirect("index.jsp");
-    	    }
+            	    if(username == null){
+            	        response.sendRedirect("src/login.jsp");
+            	    }
+            	    Long id = Long.parseLong(request.getParameter("id"));	  
+            	    Fachada fc = new Fachada();
+            	    Fornecedor forn = fc.getById(id);
+            	    if(forn == null){
+            	        response.sendRedirect("index.jsp");
+            	    }
     %>	
     <main>
         <div class="container">
             <h2>Cadastro de Fornecedores</h2>
-            <form action="AlterarFornecedor" method="post">        
+            <form action="Fornecedor" method="post">        
                 <table>                    
                     <tr><th colspan="4" align="left"><h3>Endereço</h3></th></tr>
                     <tr>
@@ -87,7 +88,7 @@
                     <tr><th colspan="4" align="left"><h3>Fornecedor</h3></th></tr>
                     <tr>
                         <td>CNAE</td>
-                        <input type="hidden" name="fornecedorId" value="<%=forn.getId()%>">
+                        <input type="hidden" name="id" value="<%=forn.getId()%>">
                         <input type="hidden" name="cnaeId" value="<%=forn.getCnae().getId()%>">
                         <td><input type="text" name="cnae" value="<%=forn.getCnae().getDescricao() %>"></td>
                         <td>CNPJ</td>
@@ -117,11 +118,12 @@
                     </tr>
                 </table>
                 <div style="display: flex; justify-content: center;">
-	                <input type="submit" id="send-button">
-	                <input type="button" id="send-button" value="Cancel">
+	                <input type="submit" id="send-button" name="operacao" value="ALTERAR" class="btn btn-warning">
+	                <a href="/gestao-fornecedores-web/Fornecedor?operacao=EXIBIR"><input type="button" id="cancel-button" value="Cancel" class="btn btn-danger" onclick="goBack()"></a>	                
                 </div>
             </form>
         </div>
     </main>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>           
 </body>
 </html>

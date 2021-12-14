@@ -1,12 +1,12 @@
 package strategy;
 
-import dominio.Dominio;
-import fornecedor.Fornecedor;
+import application.Dominio;
+import dominio.Fornecedor;
 
 public class ValidarEndereco implements IStrategy{
 
 	@Override
-	public boolean processar(Dominio dominio) {
+	public String processar(Dominio dominio) {
 		Fornecedor f = (Fornecedor)dominio;
 		if(f.getEndereco().getDescricao() != null && 
 		   f.getEndereco().getBairro() != null && 
@@ -15,9 +15,9 @@ public class ValidarEndereco implements IStrategy{
 		   f.getEndereco().getCidade().getDescricao() != null && 
 		   f.getEndereco().getUf().getDescricao() != null && 
 		   f.getEndereco().getPais().getDescricao() != null) {
-			return true;			
+			return null;			
 		}else {
-			return false;
+			return "Dados nao preenchidos.";
 		}
 	}
 	

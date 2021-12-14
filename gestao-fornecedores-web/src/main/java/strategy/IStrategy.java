@@ -1,7 +1,7 @@
 package strategy;
 
-import dominio.Dominio;
+import application.Dominio;
 
 public interface IStrategy {
-	public boolean processar(Dominio dominio);
+	public String processar(Dominio dominio);
 }

@@ -2,9 +2,11 @@ package dao;
 
 import java.util.List;
 
-public interface IDAO<T> {
-	void create(T t);
-	void delete(T t);
-	List<T> findAll();
-	void edit(T t);
+import application.Dominio;
+
+public interface IDAO {
+	void create(Dominio dominio);
+	void delete(Dominio dominio);
+	List<Dominio> findAll();
+	void edit(Dominio dominio);
 }

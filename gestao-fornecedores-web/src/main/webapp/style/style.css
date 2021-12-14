@@ -2,8 +2,7 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;    
 }
 
 body{
@@ -90,8 +89,7 @@ body{
 /* FORMULÃ�RIO */
 form{
     background: white;      
-    padding: 50px;
-    box-shadow: 5px 10px 10px #00000026;
+    padding: 50px;    
     border-radius: 20px;
 }
 
@@ -105,9 +103,8 @@ table td{
     color: rgb(151, 151, 151);    
     padding: 10px 5px 10px 0;
 }
-#send-button{
-    padding: 5px 50px;
-    border: none;   
-    background-color: rgb(128, 255, 128); 
-    border-radius: 20px;    
+
+table{
+    padding: 50px;
+    background-color: white;    
 }

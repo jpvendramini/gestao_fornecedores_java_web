@@ -1,20 +1,20 @@
 package strategy;
 
-import dominio.Dominio;
-import fornecedor.Fornecedor;
+import application.Dominio;
+import dominio.Fornecedor;
 
 public class ValidarDadosFornecedor implements IStrategy{
 
 	@Override
-	public boolean processar(Dominio dominio) {
+	public String processar(Dominio dominio) {
 		Fornecedor f = (Fornecedor) dominio;
 		if(f.getRazaoSocial() != null && 
 		   f.getNomeFantasia() != null && 
 		   f.getInscricaoEstadual() != null &&
 		   f.getInscricaoMunicipal() != null) {
-			return true;
+			return null;
 		}else {
-			return false;	
+			return "Dados incorretos ou nao preenchidos.";	
 		}		
 	}
 
