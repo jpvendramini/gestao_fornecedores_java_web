@@ -1,1 +1,2 @@
-![](imgs/filename insert.png)
+![](imgs/insert.png)
+![](imgs/navbar.png)
